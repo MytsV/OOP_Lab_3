@@ -53,9 +53,6 @@ class _DrawingPageState extends State<DrawingPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
           Text('Об\'єкти'),
-          SizedBox(
-            width: 5,
-          ),
           Icon(Icons.arrow_drop_down, color: Colors.white),
         ],
       ),
@@ -83,18 +80,8 @@ class _DrawingPageState extends State<DrawingPage> {
   }
 
   String _getAppBarText() {
-    switch (_currentEditor.runtimeType) {
-      case PointEditor:
-        return 'Крапка';
-      case LineEditor:
-        return 'Лінія';
-      case RectangleEditor:
-        return 'Прямокутник';
-      case EllipseEditor:
-        return 'Еліпс';
-      default:
-        return '';
-    }
+    Instrument instrument = instruments.firstWhere((element) => element.editor.runtimeType == _currentEditor.runtimeType);
+    return instrument.name;
   }
 
   Widget _getToolbarButton(Instrument instrument) {
@@ -108,12 +95,16 @@ class _DrawingPageState extends State<DrawingPage> {
             width: 40,
             height: 40,
             color: Colors.indigo[200],
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.indigo, width: 4),
+              color: Colors.indigo[200],
+            ),
             child: Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(5),
               child: Image.asset(
                 instrument.imagePath,
                 color: isSelected ? Colors.indigo[900] : Colors.white,
-                filterQuality: FilterQuality.none,
+                filterQuality: FilterQuality.medium,
               ),
             ),
           )),
