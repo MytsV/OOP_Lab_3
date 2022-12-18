@@ -94,7 +94,6 @@ class _DrawingPageState extends State<DrawingPage> {
           child: Container(
             width: 40,
             height: 40,
-            color: Colors.indigo[200],
             decoration: BoxDecoration(
               border: Border.all(color: Colors.indigo, width: 4),
               color: Colors.indigo[200],
